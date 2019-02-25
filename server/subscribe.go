@@ -89,7 +89,7 @@ func (s *Subscriber) Subscribe() error {
 		"config.update": s.configUpdate,
 	}
 
-	router, err := revents.NewEventRouter("", 0, s.url, s.accessKey, s.secretKey, nil, handlers, "", 3, revents.DefaultPingConfig)
+	router, err := revents.NewEventRouter("", 0, s.url, s.accessKey, s.secretKey, nil, handlers, "", 15, revents.DefaultPingConfig)
 	if err != nil {
 		return err
 	}
@@ -97,7 +97,7 @@ func (s *Subscriber) Subscribe() error {
 	s.router = router
 
 	go func() {
-		sp := revents.SkippingWorkerPool(3, nil)
+		sp := revents.SkippingWorkerPool(15, nil)
 		for {
 			s.kicker.Kick()
 			if err := s.router.RunWithWorkerPool(sp); err != nil {
