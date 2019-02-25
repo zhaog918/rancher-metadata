@@ -98,7 +98,7 @@ func valueForPath(in *interface{}, path []string) (interface{}, bool) {
 
 		default:
 			t := reflect.TypeOf(out)
-			log.Debug("Unknown type %s at /%s", t.String(), path)
+			log.Debugf("Unknown type %s at /%s", t.String(), path)
 		}
 
 		if valid == false {
